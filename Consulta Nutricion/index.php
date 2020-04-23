@@ -29,7 +29,7 @@ if (isset($_SESSION["idioma"])){
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
   <!-- Estilos customizados -->
-  <link href="css/estilos.css" rel="stylesheet">
+  <link href="css/estilos.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -60,10 +60,16 @@ if (isset($_SESSION["idioma"])){
             <a class="nav-link js-scroll-trigger" href="#contacto"><?php echo $navContacto ?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#" id="castellano"><?php echo $navIdioma ?></a>
+            <div class="dropdown nav-link">
+              <a class=" dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $navIdioma ?></a>
+              <div class="dropdown-menu " style="border-color: transparent; background-color: #212529;" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item btn bg-transparent" style="color: white; " id="castellano" type="button">Castellano</button>
+                <button class="dropdown-item btn bg-transparent" style="color: white" id="valenciano" type="button">Valenciano</button> 
+              </div>
+            </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#" id="valenciano"><?php echo $navEntrar ?></a>
+            <a class="nav-link articulo-link" data-toggle="modal" href="#entrada"><?php echo $navEntrar ?></a>
           </li>
         </ul>
       </div>
@@ -71,7 +77,7 @@ if (isset($_SESSION["idioma"])){
   </nav>
 
   <!-- Cabecera -->
-  <header class="masthead">
+  <header class="masthead " style="background-color: #212529";>
     <div class="container">
       <div class="intro-text">
         <div class="intro-lead-in"><?php echo $cabTitulo1 ?></div>
@@ -99,7 +105,7 @@ if (isset($_SESSION["idioma"])){
           <span class="fa-stack fa-3x">
            <div class="timeline-image">
              <img class="img-fluid" src="img/servicios/1.png" alt="">
-            </div>
+           </div>
           </span>
           <h4 class="service-heading"><?php echo $serServicio1 ?></h4>
           <p class="text-muted"><?php echo $serTexto1 ?></p>
@@ -130,7 +136,7 @@ if (isset($_SESSION["idioma"])){
         <div class="col-lg-2">
         </div>
         <div class="col-lg-8 text-center">
-          <a class="btn btn-primary btn-xl text-uppercase " href="#"><?php echo $serBoton ?></a>
+          <a class="btn btn-primary btn-xl text-uppercase " href="servicios.php"><?php echo $serBoton ?></a>
         </div>
         <div class="col-lg-2">
         </div>
@@ -212,7 +218,6 @@ if (isset($_SESSION["idioma"])){
         <div class="col-lg-2" >
         </div>
       </div>
-    </div>
     </div>
     <div id="navSobreMi"></div>
   </section>
@@ -343,7 +348,7 @@ if (isset($_SESSION["idioma"])){
   </section>
 
   <!-- Contacto -->
-  <section class="page-section" id="contacto">
+  <section class="page-section" id="contacto" style="background-image:url('img/cabecera.jpg')">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
@@ -628,9 +633,46 @@ if (isset($_SESSION["idioma"])){
     </div>
   </div>
 
+  <!-- Formulario de entrada -->
+  <div class="articulo-modal modal fade" id="entrada" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <div class="modal-body">
+                <!-- Interior del formulario -->
+                <h1 class="item-intro text-muted">CONSULTA NUTRICIÓN</h1>
+                  <form role="form">
+                    <div class="form-group">
+                      <label for="email">Correo electronico:</label>
+                      <input type="text" class="form-control" id="correo" name="correolg">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="pass">Contraseña:</label>
+                      <input type="password" class="form-control" id="passw" name="passwlg">
+                    </div>
+                    <small id="resgistro" class="form-text text-muted">Si no tienes cuenta, create una pulsado <a href="formulario.php"><bold>Aquí</bold></a> </small>
+                    <div class="checkbox">
+                      <label><input type="checkbox"> Recuerdame</label>
+                    </div>
+                    <button type="submit" id="loginlg" class="btn btn-primary">Entrar</button>
+                    <button class="btn btn-danger" data-dismiss="modal" type="button">
+                  <i class="fas fa-times"></i>
+                  </form>Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Nucleo Bootstrap JavaScript -->
   <script src="js/jquery/jquery.js"></script>
-  <script src="bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
   <script src="js/jquery-easing/jquery.easing.js"></script>
@@ -641,26 +683,13 @@ if (isset($_SESSION["idioma"])){
 
   <!-- Scripts customizados -->
   <script src="js/Bootstrap.js"></script>
+  <script src="js/Scripts.js"></script>
 
-  <!-- Cambio de idioma -->
+  <!-- Llamadas a funciones -->
   <script type="text/javascript">
     document.getElementById("castellano").onclick= cambioIdioma;
     document.getElementById("valenciano").onclick= cambioIdioma;
-
-        function cambioIdioma(evento){
-
-        let httpRequest= new XMLHttpRequest();
-        httpRequest.open("POST","idioma.php",true);
-        httpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        httpRequest.onreadystatechange=function(){
-
-
-            if (httpRequest.readyState==4){
-                location.reload(true);
-            }
-        }
-        httpRequest.send("idioma="+evento.target.id);
-    }
+    document.getElementById("loginlg").onclick=sitio;
   </script>
 
 </body>
