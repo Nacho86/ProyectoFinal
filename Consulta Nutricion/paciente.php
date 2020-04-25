@@ -8,9 +8,11 @@ class paciente
     public $direccion;
     public $DNI;
     public $ID_paciente;
+    public $num_Usuario;
+    public $paciente_Activo;
 
 
-    public function __construct($foto=" ", $telefono=" ", $fecha_nacimiento=" ", $direccion=" ", $DNI=" ", $ID_paciente=" ")
+    public function __construct($foto=" ", $telefono=" ", $fecha_nacimiento=" ", $direccion=" ", $DNI=" ", $ID_paciente=" ", $num_Usuario=" ",$paciente_Activo="1")
     {
         $this->foto = $foto;
         $this->telefono = $telefono;
@@ -18,6 +20,8 @@ class paciente
         $this->direccion = $direccion;
         $this->DNI = $DNI;
         $this->ID_paciente = $ID_paciente;
+        $this->num_Usuario = $num_Usuario;
+        $this->paciente_Activo = $paciente_Activo;
     }
 
     /**
@@ -127,6 +131,42 @@ class paciente
         $this->ID_paciente = $ID_paciente;
         return $this;
     }
+    /**
+     * @return string
+     */
+    public function getNum_Usuario(): string
+    {
+        return $this->Num_Usuario;
+    }
+
+    /**
+     * @param string $Num_Usuario
+     * @return paciente
+     */
+    public function setNum_Usuario(string $num_Usuario): paciente
+    {
+        $this->Num_Usuario = $Num_Usuario;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaciente_Activo(): string
+    {
+        return $this->Paciente_Activo;
+    }
+
+    /**
+     * @param string $Paciente_Activo
+     * @return paciente
+     */
+    public function setPaciente_Activo(string $Paciente_Activo): paciente
+    {
+        $this->Paciente_Activo = $Paciente_Activo;
+        return $this;
+    }
+
 
 
 

@@ -15,7 +15,7 @@ function cambioIdioma(evento){
         httpRequest.send("idioma="+evento.target.id);
     }
 
-//Funcion de acceso 
+//Funcion de Login 
      function sitio(evento){
         let httpRequest= new XMLHttpRequest();
         httpRequest.open("POST","consultas_ajax.php",true);

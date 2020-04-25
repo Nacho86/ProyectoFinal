@@ -7,14 +7,16 @@ class usuario
 	public $passw;
 	public $num_Usuario;
 	public $tipo;
+    public $usu_Activo;
 
-	public function __construct($nombre=" ",$correo=" ",$passw=" ",$num_Usuario=" ",$tipo="U")
+	public function __construct($nombre=" ",$correo=" ",$passw=" ",$num_Usuario=" ",$tipo="U", $usu_Activo="1")
 	{
 		$this->nombre=$nombre;
 		$this->correo=$correo;
         $this->passw=$passw;
         $this->num_Usuario=$num_Usuario;
         $this->tipo=$tipo;
+        $this->usu_Activo=$usu_Activo;
 	}
 
     /**
@@ -104,6 +106,23 @@ class usuario
     public function setTipo(string $tipo): usuario
     {
         $this->tipo = $tipo;
+        return $this;
+    }
+    /**
+     * @return string
+     */
+    public function getUsu_Activo(): string
+    {
+        return $this->Usu_Activo;
+    }
+
+    /**
+     * @param string $Usu_Activo
+     * @return usuario
+     */
+    public function setUsu_Activo(string $Usu_Activo): usuario
+    {
+        $this->Usu_Activo = $Usu_Activo;
         return $this;
     }
 }
