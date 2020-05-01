@@ -8,8 +8,9 @@ class usuario
 	private $num_Usuario;
 	private $tipo;
     private $usu_Activo;
+    private $ID_paciente;
 
-	public function __construct($nombre=" ",$correo=" ",$passw=" ",$num_Usuario=" ",$tipo="U", $usu_Activo="1")
+	public function __construct($nombre=" ",$correo=" ",$passw=" ",$num_Usuario=" ",$tipo="U", $usu_Activo="1", $ID_paciente = '')
 	{
 		$this->nombre=$nombre;
 		$this->correo=$correo;
@@ -17,6 +18,8 @@ class usuario
         $this->num_Usuario=$num_Usuario;
         $this->tipo=$tipo;
         $this->usu_Activo=$usu_Activo;
+        $this->ID_paciente=$ID_paciente;
+
 	}
 
     /**
@@ -25,6 +28,24 @@ class usuario
     public function getNombre(): string
     {
         return $this->nombre;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIDPaciente(): string
+    {
+        return $this->ID_paciente;
+    }
+
+    /**
+     * @param string $ID_paciente
+     * @return usuario
+     */
+    public function setIDPaciente(string $ID_paciente): usuario
+    {
+        $this->ID_paciente = $ID_paciente;
+        return $this;
     }
 
     /**

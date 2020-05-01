@@ -14,7 +14,7 @@ if (is_uploaded_file($_FILES['img']['tmp_name']) === true) {
     } else {
         $rutaDestino = "img/pacientes/imagenDefecto.jpg";
     }
-
+    $num_usu = $_POST['num_Usuario'];
     $telefono = $_POST["telefono"];
     $fecha_nacimiento = $_POST["fecha"];
     $direccion = $_POST["direccion"];
@@ -27,7 +27,7 @@ if (is_uploaded_file($_FILES['img']['tmp_name']) === true) {
 
      /*preparacion de la consulta*/
 
-    $stmt = $dbh->prepare("INSERT INTO pacientes (foto,telefono,fecha_nacimiento,direccion,DNI) VALUES (?,?,?,?,?)");
+    $stmt = $dbh->prepare("INSERT INTO pacientes (foto,telefono,fecha_nacimiento,direccion,DNI, num_Usuario) VALUES (?,?,?,?,?,?)");
 
     /*preparacion de los parametros a pasar*/
     $stmt->bindParam(1, $rutaDestino);
@@ -35,7 +35,8 @@ if (is_uploaded_file($_FILES['img']['tmp_name']) === true) {
     $stmt->bindParam(3, $fecha_nacimiento);
     $stmt->bindParam(4, $direccion);
     $stmt->bindParam(5, $DNI);
-   
+    $stmt->bindParam(6, $num_usu);
+
   
       /*ejecutamos todo lo preparado anteriormente*/
     $stmt->execute();

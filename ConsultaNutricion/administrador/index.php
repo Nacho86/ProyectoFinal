@@ -20,16 +20,6 @@
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-  
-   <!-- include libraries(jQuery, bootstrap) -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-
-<!-- include summernote css/js -->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-
 </head>
 
 <body id="page-top">
@@ -75,9 +65,9 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">ÚTILES:</h6>
-            <a class="collapse-item" href="#">Calendario</a>
-            <a class="collapse-item" href="#">Gráficas</a>
-            <a class="collapse-item" href="#">PDFs</a>
+            <a class="collapse-item" href="#" onclick="">Calendario</a>
+            <a class="collapse-item" href="#" onclick="">Gráficas</a>
+            <a class="collapse-item" href="#" onclick="">PDFs</a>
           </div>
         </div>
       </li>
@@ -92,8 +82,8 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">HERRAMIENTAS DE TRABAJO:</h6>
             <a class="collapse-item" href="#" onclick="verUsuarios()">Gestion de Usuarios</a>
-            <a class="collapse-item" href="#">Anamnesis</a>
-            <a class="collapse-item" href="#">Revisiones</a>
+            <a class="collapse-item" href="#" onclick="verUsuariosAnamnesis()">Anamnesis</a>
+            <a class="collapse-item" href="#" onclick="verUsuariosRevisiones()">Revisiones</a>
             <a class="collapse-item" href="#" onclick="verPacientesActivos()">Pacientes Activos</a>
           </div>
         </div>
@@ -117,11 +107,11 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Gestión de Artículos:</h6>
             <a class="collapse-item" href="#" onclick="nuevoArticulo()">Crear Nuevo</a>
-            <a class="collapse-item" href="#">Modificar/Borrar </a>
+            <a class="collapse-item" href="#" onclick="gestionArticulo()">Modificar/Borrar </a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">Gestión de Comentarios:</h6>
-            <a class="collapse-item" href="#" onclick="verUsuarios()">Crear Nuevo</a>
-            <a class="collapse-item" href="#">Modificar/Borrar</a>
+            <a class="collapse-item" href="#" onclick="">Crear Nuevo</a>
+            <a class="collapse-item" href="#" onclick="">Modificar/Borrar</a>
             
           </div>
         </div>
@@ -129,9 +119,9 @@
 
       <!-- Elemento barra navegacion - Usuarios -->
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="borrarMarca()">
+        <a class="nav-link" href="#" onclick="">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Citas</span></a>
+          <span>en construccion</span></a>
       </li>
 
       <!-- Elemento barra navegacion - Tablas -->
@@ -139,7 +129,7 @@
         <a class="nav-link" href="#" >
          
           <i class="fas fa-fw fa-table"></i>
-          <span>En Activo</span></a>
+          <span>en construccion</span></a>
       </li>
 
       <!-- Divisor -->
@@ -413,20 +403,14 @@
   <script src="js/demo/datatables-demo.js"></script>
   <script src="Scripts_admin.js"></script>
 
-<!-- Llamadas a la API Summernote -->
-  <script>
-      $(document).ready(function() {
-  $('#summernote').summernote({
-    lang: 'es-ES' ,
-    height: 400,  
-    with: 400,               
-    minHeight: null,             
-    maxHeight: null,           
-    focus: true 
-    });
-  });
-    </script>
-    <script src="lang/summernote-es-ES.js"></script>
+  <!-- SweetAlert -->
+  <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
+  <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
+
+  <!-- TRUMBOWYG -->
+  <link rel="stylesheet" href="../node_modules/trumbowyg/dist/ui/trumbowyg.min.css">
+  <script src="../node_modules/trumbowyg/dist/trumbowyg.min.js"></script>
+
 
 
 </body>
