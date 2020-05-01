@@ -78,21 +78,25 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!-- Servicios de la consulta -->
 
-<section class=" page-section">
+
     <?php if(isset($articulos) && count($articulos) > 0) :?>
-        <div class="container">
+
             <?php foreach ($articulos as $articulo) :?>
+            <section class=" page-section">
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-6 ">
                         <h1><a href="verArticulo.php?asset=<?= $articulo['ID_art'] ?>"><?= $articulo['titulo'] ?></a></h1>
                         <p><?= $articulo['resumen'] ?></p>
                     </div>
                     <div class="col-lg-6 ">
-                        <a href="verArticulo.php?asset=<?= $articulo['ID_art'] ?>"><img class="img-fluid" src="<?= $articulo['imagen'] ?>" alt=""></a>
+                        <a href="verArticulo.php?asset=<?= $articulo['ID_art'] ?>"><img class="img-fluid" src="<?= $articulo['imagen'] ?>" alt="" width="650px" ></a>
                     </div>
                 </div>
+            </div>
+            </section>
             <?php endforeach; ?>
-        </div>
+
     <?php else :?>
         <div class="container">
             <div class="row">
@@ -100,7 +104,7 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     <?php endif; ?>
-</section>
+
 
 
 

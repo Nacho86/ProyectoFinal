@@ -197,7 +197,7 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <a class="articulo-link"
                                href="#articulo<?= $articulos[$i]['ID_art'] ?>"
                                data-toggle="modal">
-                                <img class="img-fluid" src="<?= $articulos[$i]['imagen'] ?>" alt="">
+                                <img class="img-fluid" src="<?= $articulos[$i]['imagen'] ?>"  alt="Responsive image">
                             </a>
                             <div class="portfolio-caption">
                                 <h4>
@@ -470,7 +470,7 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="modal-body">
                                     <!-- Interior del articulo -->
                                     <h2 class="text-uppercase"><?= $articulos[$j]['titulo'] ?></h2>
-                                    <img class="img-fluid d-block mx-auto" src="<?= $articulos[$j]['imagen'] ?>" alt="">
+                                    <img class="img-fluid d-block  " src="<?= $articulos[$j]['imagen'] ?>"  alt="Responsive image">
                                     <?= $articulos[$j]['contenido'] ?>
                                     <ul class="list-inline">
                                         <li><?php echo $artFecha ?>: <?= $articulos[$j]['fecha'] ?></li>

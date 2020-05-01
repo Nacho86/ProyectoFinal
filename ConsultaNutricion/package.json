@@ -1,0 +1,28 @@
+{
+  "name": "proyectofinalnacho",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nacho86/ProyectoFinal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nacho86/ProyectoFinal/issues"
+  },
+  "homepage": "https://github.com/Nacho86/ProyectoFinal#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@fullcalendar/core": "^4.4.0",
+    "@fullcalendar/daygrid": "^4.4.0",
+    "bootstrap": "^4.4.1",
+    "hover.css": "^2.3.2",
+    "sweetalert2": "^9.10.12",
+    "trumbowyg": "^2.21.0"
+  }
+}
