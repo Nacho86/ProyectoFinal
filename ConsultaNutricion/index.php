@@ -96,6 +96,10 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                aria-expanded="false"><?php echo $_SESSION['nombre'] ?></a>
                             <div class="dropdown-menu " style="border-color: transparent; background-color: #212529;"
                                  aria-labelledby="dropdownMenu2">
+                                <a href="pagCitas.php">
+                                    <button class="dropdown-item btn bg-transparent" style="color: white" id="valenciano"
+                                            type="button">Pedir cita
+                                    </button></a>
                                 <form action="cerrarSesion.php" method="post">
                                     <input  class="dropdown-item btn bg-transparent" style="color: white; " id="cerrar"
                                              type="submit" value="Cerrar Sesión">
@@ -343,7 +347,11 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </li>
                     <li class="timeline-inverted ">
-                        <a href="#">
+                        <?php if (!isset($_SESSION['nombre'])) : ?>
+                        <a href="formulario.php" >
+                        <?php else : ?>
+                            <a href="pagCitas.php">
+                            <?php endif; ?>
                             <div class="timeline-image ">
                                 <h4><?php echo $pidBoton ?></h4>
                             </div>
@@ -366,36 +374,41 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                <form id="contactForm" name="sentMessage"  role="form" action="contactos.php" method="post" onsubmit="checkSubmit();">
                     <div class="row">
                         <div class="col-md-6">
+
                             <div class="form-group">
-                                <input class="form-control" id="nombre" type="text"
+                                <input class="form-control" name="nombre" id="nombre" type="text"
                                        placeholder="<?php echo $conPlaceNombre ?>" required="required"
                                        data-validation-required-message="<?php echo $conRequeridoNombre ?>">
                                 <p class="help-block text-danger"></p>
                             </div>
+
                             <div class="form-group">
-                                <input class="form-control" id="email" type="email"
+                                <input class="form-control" name="correo" id="email" type="email"
                                        placeholder="<?php echo $conPlaceEmail ?>" required="required"
                                        data-validation-required-message="<?php echo $conRequeridoEmail ?>">
                                 <p class="help-block text-danger"></p>
                             </div>
+
                             <div class="form-group">
-                                <input class="form-control" id="telefono" type="tel"
+                                <input class="form-control" name="telefono" id="telefono" pattern="[0-9]{9}" type="tel"
                                        placeholder="<?php echo $conPlaceTelefono ?>" required="required"
                                        data-validation-required-message="<?php echo $conRequeridoTelefono ?>">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
-                                <textarea class="form-control" id="mensaje" placeholder="<?php echo $conPlaceMensaje ?>"
+                                <textarea class="form-control" name="mensaje" id="mensaje" placeholder="<?php echo $conPlaceMensaje ?>"
                                           required="required"
                                           data-validation-required-message="<?php echo $conRequeridoMensaje ?>"></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
+
                         <div class="clearfix"></div>
                         <div class="col-lg-12 text-center">
                             <div id="success"></div>
@@ -550,6 +563,9 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script src="js/Bootstrap.js"></script>
 <script src="js/Scripts.js"></script>
 
+<!-- SweetAlert -->
+<script src="node_modules/sweetalert2/dist/sweetalert2.js"></script>
+<link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.css">
 <!-- Llamadas a funciones -->
 <script type="text/javascript">
     document.getElementById("castellano").onclick = cambioIdioma;

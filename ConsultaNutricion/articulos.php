@@ -6,6 +6,7 @@ $ruta = "img/articulos/";
 if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
     if(isset($_POST['ID_art'])) {
+
         if (is_uploaded_file($_FILES['img']['tmp_name']) === true) {
             $nombre = $_FILES['img']['name'];
             $idUnico = time();
@@ -14,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
         } else {
             $rutaDestino = "img/articulos/imagenDefecto.jpg";
         }
+
         $dbh = Connection::make();
         $stmt = $dbh->prepare('UPDATE articulos SET titulo = :titulo, resumen = :resumen, imagen = :imagen, contenido = :contenido, fecha = CURRENT_DATE, cat1 = :cat1, cat2 = :cat2 WHERE ID_art = :id');
         $parameters = [

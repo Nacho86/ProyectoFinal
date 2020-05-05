@@ -53,3 +53,12 @@ function cerrarSesion() {
     httpRequest.send('logout=');
 }
 
+function checkSubmit() {
+    document.getElementById("sendMessageButton").disabled=true;
+    Swal.fire(
+        'Tu mensaje ha sido enviado!',
+        'Recibiras una respuesta en 24/72 horas!'
+    )
+
+}
+

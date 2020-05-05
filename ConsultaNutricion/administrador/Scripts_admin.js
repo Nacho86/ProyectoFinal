@@ -1,52 +1,15 @@
-// Funcion para CREAR TABLAS MEDIANTE DOM
-function crearTablasUsuarios() {
-    borrarMarca();
 
-    let contenedor = document.createElement("div");
-    contenedor.setAttribute('class', 'container-fluid');
-    contenedor.setAttribute('id', 'prueba');
-    let titulo = document.createElement("h1");
-    titulo.setAttribute('class', 'h3 mb-2 text-gray-800');
-    let textoTitulo = document.createTextNode('CONTROL DE USUARIOS');
-    let parrafoTitulo = document.createElement("p");
-    parrafoTitulo.setAttribute('class', 'mb-4');
-    let textoParrafo = document.createTextNode('Elimina, modifica o añade usuarios');
-    let capa1 = document.createElement("div");
-    capa1.setAttribute('class', 'card shadow mb-4');
-    let capa2 = document.createElement("div");
-    capa2.setAttribute('class', 'card-header py-3');
-    let tituloCapas = document.createElement("h6");
-    tituloCapas.setAttribute('class', 'm-0 font-weight-bold text-primary');
-    let textoTituloCapas = document.createTextNode('Información de Usuarios');
-    let cuerpo = document.createElement("div");
-    cuerpo.setAttribute('class', 'card-body');
-    let tablaResponsiva = document.createElement("div");
-    tablaResponsiva.setAttribute('class', 'table-responsive');
-    let tablas = document.createElement("table");
-    tablas.setAttribute('class', 'table table-bordered');
-    tablas.setAttribute('id', 'dataTable');
-    tablas.setAttribute('width', '100%');
-    tablas.setAttribute('cellspacing', '0');
-
-    let principal = document.getElementsByClassName("marca");
-    principal[0].appendChild(contenedor);
-    contenedor.appendChild(titulo);
-    titulo.appendChild(textoTitulo);
-    contenedor.appendChild(parrafoTitulo);
-    parrafoTitulo.appendChild(textoParrafo);
-    contenedor.appendChild(capa1);
-    capa1.appendChild(capa2);
-    capa2.appendChild(tituloCapas);
-    tituloCapas.appendChild(textoTituloCapas);
-    capa1.appendChild(cuerpo);
-    cuerpo.appendChild(tablaResponsiva);
-    tablaResponsiva.appendChild(tablas);
-
+// Funcion para BORRAR lo que este hecho por DOM
+function borrarMarcaCalendario(evento) {
+    if (document.getElementById('marcaCalendario')) {
+        document.getElementById('marcaCalendario').parentNode.removeChild(document.getElementById('marcaCalendario'));
+    }
 }
 
 // Funcion para ver los PACIENTES ACTIVOS
 function verPacientesActivos() {
     borrarMarca();
+    borrarMarcaCalendario();
 
     let contenedor = document.createElement("div");
     contenedor.setAttribute('class', 'container-fluid');
@@ -105,6 +68,7 @@ function verPacientesActivos() {
 function verUsuarios() {
 
     borrarMarca();
+    borrarMarcaCalendario();
 
     let contenedor = document.createElement("div");
     contenedor.setAttribute('class', 'container-fluid');
@@ -164,6 +128,7 @@ function verUsuarios() {
 function verUsuariosAnamnesis() {
 
     borrarMarca();
+    borrarMarcaCalendario();
 
     let contenedor = document.createElement("div");
     contenedor.setAttribute('class', 'container-fluid');
@@ -222,6 +187,7 @@ function verUsuariosAnamnesis() {
 
 function verUsuariosRevisiones() {
     borrarMarca();
+    borrarMarcaCalendario();
 
     let contenedor = document.createElement("div");
     contenedor.setAttribute('class', 'container-fluid');
@@ -280,6 +246,7 @@ function verUsuariosRevisiones() {
 //Funcion para CREAR NUEVO PACIENTE mediante DOM
 function nuevoPaciente(id) {
     borrarMarca();
+    borrarMarcaCalendario();
     usuario = event.target.parentNode.parentNode.getElementsByTagName('td')[0].innerText;
     let contenedor = document.createElement("div");
     contenedor.setAttribute('class', 'container-fluid');
@@ -493,6 +460,7 @@ function eliminarPaciente(id) {
 //Funcion para CREAR NUEVO ARTICULO mediante DOM
 function nuevoArticulo() {
     borrarMarca();
+    borrarMarcaCalendario();
     let contenedor = document.createElement("div");
     contenedor.setAttribute('class', 'container-fluid');
     contenedor.setAttribute('id', 'prueba');
@@ -645,6 +613,7 @@ function nuevoArticulo() {
 //Funcion para crear GESTION DE LOS ARTICULOS
 function gestionArticulo() {
     borrarMarca();
+    borrarMarcaCalendario();
     crearTablasArticulos();
 
     let httpRequest = new XMLHttpRequest();
@@ -947,7 +916,7 @@ function modificarPaciente(id) {
                 let input3 = document.createElement("input");
                 input3.setAttribute('type', 'date');
                 input3.setAttribute('class', 'form-control glyphicon glyphicon-th');
-                input3.setAttribute('name', 'fecha');
+                input3.setAttribute('name', 'fecha_nacimiento');
                 input3.setAttribute('required', 'true');
                 input3.setAttribute('style', 'width: 180px');
                 input3.setAttribute('value', paciente['fecha_nacimiento']);
@@ -978,6 +947,12 @@ function modificarPaciente(id) {
                 input6.setAttribute('type', 'hidden');
                 input6.setAttribute('name', 'ID_paciente');
                 input6.setAttribute('value', paciente['ID_paciente']);
+
+                let input7 = document.createElement('input');
+                input7.setAttribute('type', 'hidden');
+                input7.setAttribute('name', 'num_Usuario');
+                input7.setAttribute('value', paciente['num_Usuario']);
+
 
                 let botonEnvio = document.createElement("button");
                 botonEnvio.setAttribute('type', 'submit');
@@ -1030,12 +1005,17 @@ function modificarPaciente(id) {
                 grupoFormulario.appendChild(input6);
 
                 cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(input7);
+
+
+                cuerpoFormulario.appendChild(grupoFormulario);
                 grupoFormulario.appendChild(br);
 
                 cuerpoFormulario.appendChild(grupoFormulario);
                 grupoFormulario.appendChild(botonEnvio);
                 botonEnvio.appendChild(textBotonEnvio);
             }
+
         }
     };
     httpRequest.send('getPaciente=' + id);
@@ -2496,4 +2476,187 @@ function verTodasRevisiones(id) {
     httpRequest.send('verTodasRevisiones=');
 
 
+}
+
+function verMensajes() {
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', '../consultas_ajax.php', true);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+                document.getElementById('mensajes').innerHTML = httpRequest.responseText;
+            }
+        }
+    };
+    httpRequest.send('verMensajes=');
+
+
+}
+
+function verAlertas() {
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', '../consultas_ajax.php', true);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+                document.getElementById('alertas').innerHTML = httpRequest.responseText;
+            }
+        }
+    };
+    httpRequest.send('verAlertas=');
+
+
+}
+
+function verGraficas() {
+
+    borrarMarca();
+    borrarMarcaCalendario();
+
+    let contenedor = document.createElement("div");
+    contenedor.setAttribute('class', 'container-fluid');
+    contenedor.setAttribute('id', 'prueba');
+    let titulo = document.createElement("h1");
+    titulo.setAttribute('class', 'h3 mb-2 text-gray-800');
+    let textoTitulo = document.createTextNode('GRAFICAS');
+    let parrafoTitulo = document.createElement("p");
+    parrafoTitulo.setAttribute('class', 'mb-4');
+    let textoParrafo = document.createTextNode('VISUALIZA EL AVANCE DE FORMA GRAFICA');
+    let capa1 = document.createElement("div");
+    capa1.setAttribute('class', 'card shadow mb-4');
+    let capa2 = document.createElement("div");
+    capa2.setAttribute('class', 'card-header py-3');
+    let tituloCapas = document.createElement("h6");
+    tituloCapas.setAttribute('class', 'm-0 font-weight-bold text-primary');
+    let textoTituloCapas = document.createTextNode('Elige el usuario');
+    let cuerpo = document.createElement("div");
+    cuerpo.setAttribute('class', 'card-body');
+    let tablaResponsiva = document.createElement("div");
+    tablaResponsiva.setAttribute('class', 'table-responsive');
+    let tablas = document.createElement("table");
+    tablas.setAttribute('class', 'table table-bordered');
+    tablas.setAttribute('id', 'dataTable');
+    tablas.setAttribute('width', '100%');
+    tablas.setAttribute('cellspacing', '0');
+
+
+    let principal = document.getElementsByClassName("marca");
+    principal[0].appendChild(contenedor);
+    contenedor.appendChild(titulo);
+    titulo.appendChild(textoTitulo);
+    contenedor.appendChild(parrafoTitulo);
+    parrafoTitulo.appendChild(textoParrafo);
+    contenedor.appendChild(capa1);
+    capa1.appendChild(capa2);
+    capa2.appendChild(tituloCapas);
+    tituloCapas.appendChild(textoTituloCapas);
+    capa1.appendChild(cuerpo);
+    cuerpo.appendChild(tablaResponsiva);
+    tablaResponsiva.appendChild(tablas);
+
+
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', '../consultas_ajax.php', true);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+                document.getElementById('dataTable').innerHTML = httpRequest.responseText;
+            }
+        }
+    };
+    httpRequest.send('verGraficas=');
+
+}
+
+function datosGraficas(id) {
+    borrarMarca();
+    borrarMarcaCalendario();
+
+    let contenedor = document.createElement("div");
+    contenedor.setAttribute('class', 'container-fluid');
+    contenedor.setAttribute('id', 'prueba');
+    let titulo = document.createElement("h1");
+    titulo.setAttribute('class', 'h3 mb-2 text-gray-800');
+    let textoTitulo = document.createTextNode('GRAFICAS');
+    let parrafoTitulo = document.createElement("p");
+    parrafoTitulo.setAttribute('class', 'mb-4');
+    let textoParrafo = document.createTextNode('VISUALIZA EL AVANCE DE FORMA GRAFICA');
+    let capa1 = document.createElement("div");
+    capa1.setAttribute('class', 'card shadow mb-4');
+    let capa2 = document.createElement("div");
+    capa2.setAttribute('class', 'card-header py-3');
+    let tituloCapas = document.createElement("h6");
+    tituloCapas.setAttribute('class', 'm-0 font-weight-bold text-primary');
+    let textoTituloCapas = document.createTextNode('Datos del usuario');
+    let cuerpo = document.createElement("div");
+    cuerpo.setAttribute('class', 'card-body');
+    let graficas=document.createElement("div");
+    graficas.setAttribute('id','myfirstchart');
+
+
+
+    let principal = document.getElementsByClassName("marca");
+    principal[0].appendChild(contenedor);
+    contenedor.appendChild(titulo);
+    titulo.appendChild(textoTitulo);
+    contenedor.appendChild(parrafoTitulo);
+    parrafoTitulo.appendChild(textoParrafo);
+    contenedor.appendChild(capa1);
+    capa1.appendChild(capa2);
+    capa2.appendChild(tituloCapas);
+    tituloCapas.appendChild(textoTituloCapas);
+    capa1.appendChild(cuerpo);
+    cuerpo.appendChild(graficas);
+
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', '../consultas_ajax.php', true);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+                if(httpRequest.responseText != '') {
+                    let revisiones = JSON.parse(httpRequest.responseText);
+                    console.log(revisiones);
+
+                    new Morris.Line({
+                        // ID of the element in which to draw the chart.
+                        element: 'myfirstchart',
+                        // Chart data records -- each entry in this array corresponds to a point on
+                        // the chart.
+                        data: revisiones
+                            /*[
+                            { year: '2008', value: 200,value2: 200 },
+                            { year: '2009', value: 10,value2: 150 },
+                            { year: '2010', value: 5,value2: 100 },
+                            { year: '2011', value: 5,value2: 15 },
+                            { year: '2013', value: 10,value2: 25 },
+                            { year: '2020', value: 250,value2: 183 },
+                            { year: '2021', value: 5,value2: 182.5 },
+                            { year: '2022', value: 20,value2: 100 }
+                            ]*/
+                        ,
+                        // The name of the data record attribute that contains x-values.
+                        xkey: 'fecha',
+                        // A list of names of data record attributes that contain y-values.
+                        ykeys: ['agua', 'grasa_cor', 'indice_cor', 'masa_mag', 'peso'],
+                        // Labels for the ykeys -- will be displayed when you hover over the
+                        // chart.
+                        labels: ['Agua','Grasa Corporal', 'Indice Corporal', 'Masa magra', 'Peso'],
+                        resize: true,
+                        lineColors: ['red', 'blue', 'orange', 'yellow', 'green']
+                    })
+                }
+            }
+        }
+    };
+    httpRequest.send('datosGraf='+id);
+
+
+}
+
+function eliminarFecha() {
+    alert($('#txtFechaDelete').val());
 }

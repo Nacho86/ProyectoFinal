@@ -5,11 +5,11 @@ date_default_timezone_set('UTC');
 
 if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
-	$ID_usu = $_POST["ID_usu"];
-    $fecha = $_POST["fecha"];
-    $duracion = $_POST["duracion"];
+	$ID_Res = $_POST["ID_Res"];
     $reserva = $_POST["reserva"];
-
+    $confReserva = $_POST["confReserva"];
+    $usuarioReserva = $_POST["usuarioReserva"];
+    $fecha = date();
 
     /*preparacion de la conexion*/
 
@@ -17,27 +17,20 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
 
     /*preparacion de la consulta*/
 
-    $stmt = $dbh->prepare("INSERT INTO articulos (ID_usu,fecha,duracion,reserva) VALUES (?,?,?,"1")");
+    $stmt = $dbh->prepare("INSERT INTO articulos (ID_Res,reserva,confReserva,usuarioReserva,fecha) VALUES (?,0,0,?,?)");
 
     /*preparacion de los parametros a pasar*/
-    $stmt->bindParam(1, $ID_usu);
-    $stmt->bindParam(2, $fecha);
-    $stmt->bindParam(3, $duracion);
-    $stmt->bindParam(4, $reserva);
-  
+    $stmt->bindParam(1, $ID_Res);
+    $stmt->bindParam(2, $reserva);
+    $stmt->bindParam(3, $confReserva);
+    $stmt->bindParam(4, $usuarioReserva);
+    $stmt->bindParam(5, $fecha);
+
    
 
      /*ejecutamos todo lo preparado anteriormente*/
     $stmt->execute();
 
-    if (isset($_POST['ID_usu'])) {
-        $stmt = $dbh->prepare("SELECT * FROM citas ");
 
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "cita");
-        $stmt->execute();
-
-        $resultado = $stmt->fetchAll();
-
-    }
 
 }

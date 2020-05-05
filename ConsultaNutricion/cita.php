@@ -2,72 +2,44 @@
 
 class cita
 {
-	private $ID_usu;
-	private $fecha;
-	private $duracion;
+    private $ID_Res;
     private $reserva;
-	private $pago;
-
-	public function __construct($ID_usu=" ",$fecha=" ",$duracion=" ",$reserva=" ",$pago="")
-	{
-		$this->ID_usu=$ID_usu;
-		$this->fecha=$fecha;
-		$this->duracion=$duracion;
-		$this->pago=$pago;
-
-	}
+    private $confReserva;
+    private $usuarioReserva;
+    private $fecha;
 
     /**
-     * @return string
+     * cita constructor.
+     * @param $ID_Res
+     * @param $reserva
+     * @param $confReserva
+     * @param $usuarioReserva
+     * @param $fecha
      */
-    public function getIDUsu(): string
+    public function __construct($ID_Res=" ", $reserva=" ", $confReserva=" ", $usuarioReserva=" ", $fecha=" ")
     {
-        return $this->ID_usu;
-    }
-
-    /**
-     * @param string $ID_usu
-     * @return cita
-     */
-    public function setIDUsu(string $ID_usu): cita
-    {
-        $this->ID_usu = $ID_usu;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFecha(): string
-    {
-        return $this->fecha;
-    }
-
-    /**
-     * @param string $fecha
-     * @return cita
-     */
-    public function setFecha(string $fecha): cita
-    {
+        $this->ID_Res = $ID_Res;
+        $this->reserva = $reserva;
+        $this->confReserva = $confReserva;
+        $this->usuarioReserva = $usuarioReserva;
         $this->fecha = $fecha;
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getDuracion(): string
+    public function getIDRes(): string
     {
-        return $this->duracion;
+        return $this->ID_Res;
     }
 
     /**
-     * @param string $duracion
+     * @param string $ID_Res
      * @return cita
      */
-    public function setDuracion(string $duracion): cita
+    public function setIDRes(string $ID_Res): cita
     {
-        $this->duracion = $duracion;
+        $this->ID_Res = $ID_Res;
         return $this;
     }
 
@@ -92,18 +64,56 @@ class cita
     /**
      * @return string
      */
-    public function getPago(): string
+    public function getConfReserva(): string
     {
-        return $this->pago;
+        return $this->confReserva;
     }
 
     /**
-     * @param string $pago
+     * @param string $confReserva
      * @return cita
      */
-    public function setPago(string $pago): cita
+    public function setConfReserva(string $confReserva): cita
     {
-        $this->pago = $pago;
+        $this->confReserva = $confReserva;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getUsuarioReserva(): string
+    {
+        return $this->usuarioReserva;
+    }
+
+    /**
+     * @param string $usuarioReserva
+     * @return cita
+     */
+    public function setUsuarioReserva(string $usuarioReserva): cita
+    {
+        $this->usuarioReserva = $usuarioReserva;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFecha(): string
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * @param string $fecha
+     * @return cita
+     */
+    public function setFecha(string $fecha): cita
+    {
+        $this->fecha = $fecha;
+        return $this;
+    }
+
+
 }

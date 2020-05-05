@@ -12,7 +12,7 @@ class paciente
     private $paciente_Activo;
 
 
-    public function __construct($img=" ", $telefono=" ", $fecha_nacimiento=" ", $direccion=" ", $DNI=" ", $ID_paciente=" ", $num_Usuario=" ",$paciente_Activo="1")
+    public function __construct($img = " ", $telefono = " ", $fecha_nacimiento = " ", $direccion = " ", $DNI = " ", $ID_paciente = " ", $num_Usuario = " ", $paciente_Activo = "1")
     {
         $this->img = $img;
         $this->telefono = $telefono;
@@ -131,6 +131,7 @@ class paciente
         $this->ID_paciente = $ID_paciente;
         return $this;
     }
+
     /**
      * @return string
      */
@@ -166,8 +167,6 @@ class paciente
         $this->Paciente_Activo = $Paciente_Activo;
         return $this;
     }
-
-
 
 
 }

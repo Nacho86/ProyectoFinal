@@ -5,7 +5,7 @@ require_once "usuario.php";
 if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
 
-	$nombre = $_POST["nombre"];
+    $nombre = $_POST["nombre"];
     $correo = $_POST["correo"];
     $codigo = $_POST["passw"];
     $passw=password_hash($codigo,PASSWORD_DEFAULT,['cost'=> 14]);
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
     $stmt->bindParam(2, $correo);
     $stmt->bindParam(3, $passw);
 
-     /*ejecutamos todo lo preparado anteriormente*/
+    /*ejecutamos todo lo preparado anteriormente*/
     $stmt->execute();
 
     if (isset($_POST['nombre'])) {
@@ -36,6 +36,6 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
         $resultado = $stmt->fetchAll();
 
     }
-
+    sleep(3);
     header('Location: index.php');
 }

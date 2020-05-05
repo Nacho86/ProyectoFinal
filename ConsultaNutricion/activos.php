@@ -266,7 +266,8 @@ class activos
         $this->paciente_Activo = $paciente_Activo;
         return $this;
     }
-
-
 }
+
+
+
 ?>
