@@ -8,6 +8,7 @@ require_once "cita.php";
 require_once "paciente.php";
 require_once "revision.php";
 require_once "activos.php";
+require_once "alertas.php";
 require_once "contacto.php";
 $dbh = Connection::make();
 
@@ -25,8 +26,10 @@ if (isset($_POST['correolg'])) {
 
     if (password_verify($datos[1], $resultado[0])) {
         $_SESSION['correo'] = $datos[0];
+        $_SESSION['tipo'] = $resultado[1];
         $_SESSION['nombre'] = $resultado[2];
-        $_SESSION['num_Usuario']= $resultado[3];
+        $_SESSION['num_Usuario'] = $resultado[3];
+
         echo $resultado[1];
 
     } else {
@@ -307,7 +310,7 @@ if (isset($_POST['verUsuariosRevisiones'])) {
 
 //Sacar los usuarios para REVISIONES.
 if (isset($_POST['verTodasRevisiones'])) {
-    $stmt = $dbh->prepare("SELECT * FROM revisiones ORDER BY fecha DESC");
+    $stmt = $dbh->prepare("SELECT * FROM revisiones ORDER BY ID_revision DESC");
     $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "revision");
     $stmt->execute();
 
@@ -358,12 +361,12 @@ if (isset($_POST['verTodasRevisiones'])) {
                 <td><?php echo $result->getIDRevision() ?></td>
                 <th>
                     <button type="button" name="modificarRevision" class="btn btn-primary" id="modificarRevision"
-                            onclick="modificarRevision()">Modificar Revisión
+                            onclick="modificarRevision(<?= $result->getIDRevision() ?>)">Modificar Revisión
                     </button>
                 </th>
                 <th>
                     <button type="button" name="eliminarRevision" class="btn btn-danger" id="eliminarRevision"
-                            onclick="eliminarRevision()">Eliminar Revisión
+                            onclick="eliminarRevision(<?= $result->getIDRevision() ?>)">Eliminar Revisión
                     </button>
                 </th>
             </tr>
@@ -446,19 +449,20 @@ if (isset($_POST['verMensajes'])) {
             Centro de Mensajes
         </h6>
         <?php foreach ($mensajes as $result) : ?>
-            <a class="dropdown-item d-flex align-items-center" href="#" onclick="modelMensaje(<?=$result->getIDMensaje()?>)" >
+            <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal"
+               data-target="#modalMensajes<?= $result->getIDMensaje() ?>" ?>
                 <div class="dropdown-list-image mr-3">
                     <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60"
                          alt="">
                     <div class="status-indicator bg-success"></div>
                 </div>
                 <div class="font-weight-bold">
-                    <div class="text-truncate"><?php echo $result->getMensaje() ?></div>
+                    <div class="text-truncate"><?php echo $result->getCorreo() ?></div>
                     <div class="small text-gray-500"><?php echo $result->getNombre() ?></div>
                 </div>
             </a>
         <?php endforeach; ?>
-        <a class="dropdown-item text-center small text-gray-500" href="#">Ver todos los mensajes</a>
+        <a class="dropdown-item text-center small text-gray-500" href="#" onclick="verTodosMensajes()">Ver todos los mensajes</a>
         <?php
     }
 }
@@ -474,27 +478,29 @@ if (isset($_POST['verAlertas'])) {
     $avisos = $stmt->fetchAll();
 
 
-
     if (!is_null($avisos)) { ?>
-        <!-- Desplegable - Mensajes -->
+
+
+        <!-- Desplegable  Alertas -->
 
         <h6 class="dropdown-header">
             Alertas
         </h6>
         <?php foreach ($avisos as $result) : ?>
-            <a class="dropdown-item d-flex align-items-center" href="#" onclick="modelAvisos(<?=$result['ID_Usuario']?>)">
-                <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                        <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
+            <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal"
+               data-target="#modalAvisos<?= $result['ID_Res'] ?>" )">
+            <div class="mr-3">
+                <div class="icon-circle bg-warning">
+                    <i class="fas fa-exclamation-triangle text-white"></i>
                 </div>
-                <div>
-                    <div class="small text-gray-500"><?php echo $result['fecha'] ?></div>
-                    <?php echo $result['nombre'] ?>
-                </div>
+            </div>
+            <div>
+                <div class="small text-gray-500"><?php echo $result['fecha'] ?></div>
+                <?php echo $result['nombre'] ?>
+            </div>
             </a>
         <?php endforeach; ?>
-        <a class="dropdown-item text-center small text-gray-500" href="#">Ver todas las alertas</a>
+        <a class="dropdown-item text-center small text-gray-500" href="#" onclick="verTodosAvisos()">Ver todas las alertas</a>
         <?php
     }
 }
@@ -508,6 +514,8 @@ if (isset($_POST['verGraficas'])) {
     $resultado = $stmt->fetchAll();
 
     if (!is_null($resultado)) { ?>
+
+
         <!-- Barra superior de la Tabla -->
         <thead>
         <tr>
@@ -573,7 +581,7 @@ if (isset($_POST['eliminarFecha'])) {
 if (isset($_POST['eliminarCita'])) {
     $stmt = $dbh->prepare('DELETE FROM citas WHERE fecha = :fecha AND ID_Usuario = :num_Usuario ');
     $parameters = [':fecha' => $_POST['eliminarCita'],
-    ':num_Usuario'=> $_SESSION['num_Usuario']];
+        ':num_Usuario' => $_SESSION['num_Usuario']];
     $stmt->execute($parameters);
 }
 
@@ -592,10 +600,10 @@ if (isset($_POST['datosGraf'])) {
 // Coger la cita elegida
 if (isset($_POST['cogerCita'])) {
     $stmt_comprobar = $dbh->prepare('SELECT * FROM citas WHERE fecha = :fecha');
-    $parameters2 =[':fecha'=> $_POST['cogerCita']];
+    $parameters2 = [':fecha' => $_POST['cogerCita']];
     $stmt = $dbh->prepare("INSERT INTO citas(reserva, confReserva, ID_Usuario, fecha ) VALUES (1,0,:num_Usuario,:fecha)");
     $parameters = [':fecha' => $_POST['cogerCita'],
-        ':num_Usuario'=> $_SESSION['num_Usuario']
+        ':num_Usuario' => $_SESSION['num_Usuario']
     ];
 
 
@@ -608,5 +616,149 @@ if (isset($_POST['cogerCita'])) {
     } else {
         $stmt->execute($parameters);
         echo 'no existe';
+    }
+}
+
+
+//Eliminar la revision seleccionada
+if (isset($_POST['removeRevision'])) {
+    $stmt = $dbh->prepare("DELETE FROM revisiones WHERE ID_revision = :id");
+    $parameters = [':id' => $_POST['removeRevision']];
+    $stmt->execute($parameters);
+}
+
+//Get revisiones
+if (isset($_POST['getRevision'])) {
+    $stmt = $dbh->prepare("SELECT * FROM revisiones WHERE ID_revision = :id");
+    $parameters = [':id' => $_POST['getRevision']];
+    $stmt->execute($parameters);
+    $revision = $stmt->fetch(PDO::FETCH_ASSOC);
+    echo json_encode($revision);
+}
+
+//Get paciente
+if (isset($_POST['comprobar'])) {
+    $stmt = $dbh->prepare("SELECT correo FROM usuarios WHERE correo = :correo");
+    $parameters = [':correo' => $_POST['comprobar']];
+    $stmt->execute($parameters);
+    $correo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($correo) > 0) {
+        echo 'existe';
+    } else {
+        echo 'no existe';
+    }
+}
+
+// Confirma la reserva
+if (isset($_POST['confirmaReserva'])) {
+    $stmt = $dbh->prepare("UPDATE citas SET confReserva = 1,reserva = 0  WHERE ID_Res = :id");
+    $parameters = [':id' => $_POST['confirmaReserva']];
+    $stmt->execute($parameters);
+
+}
+
+// Mensaje enviado
+if (isset($_POST['mensajeRespondido'])) {
+    $stmt = $dbh->prepare("UPDATE contacto SET vistos = 1  WHERE ID_Mensaje = :id");
+    $parameters = [':id' => $_POST['mensajeRespondido']];
+    $stmt->execute($parameters);
+
+}
+
+//Sacar todos las alertas.
+if (isset($_POST['verTodosAvisos'])) {
+    $stmt = $dbh->prepare("SELECT * FROM citas C, usuarios U WHERE C.ID_Usuario = U.num_Usuario AND C.confReserva = 1");
+    $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "alertas");
+    $stmt->execute();
+
+    $resultado = $stmt->fetchAll();
+
+    if (!is_null($resultado)) { ?>
+
+
+        <!-- Barra superior de la Tabla -->
+        <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>Nº USUARIO</th>
+            <th>Nº RESERVA</th>
+            <th>FECHA</th>
+        </tr>
+        </thead>
+        <!-- Barra inferior de la Tabla -->
+        <tfoot>
+        <tr>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>Nº USUARIO</th>
+            <th>Nº RESERVA</th>
+            <th>FECHA</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        <?php foreach ($resultado as $result) : ?>
+            <!-- Desde aqui los datos de cada paciente y usuario -->
+            <tr>
+                <td><?php echo $result->getNombre() ?></td>
+                <td><a href="mailto:<?php echo $result->getCorreo()?>"><?php echo $result->getCorreo()?></a></td>
+                <td><?php echo $result->getNumUsuario() ?></td>
+                <td><?php echo $result->getIDRes() ?></td>
+                <td><?php echo $result->getFecha() ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+        <?php
+    }
+}
+
+//Sacar todos los mensajes.
+if (isset($_POST['verTodosMensajes'])) {
+    $stmt = $dbh->prepare("SELECT * FROM contacto");
+    $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "contacto");
+    $stmt->execute();
+
+    $resultado = $stmt->fetchAll();
+
+    if (!is_null($resultado)) { ?>
+
+
+        <!-- Barra superior de la Tabla -->
+        <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>TELEFONO</th>
+            <th>MENSAJE</th>
+            <th>Nº MENSAJE</th>
+
+        </tr>
+        </thead>
+        <!-- Barra inferior de la Tabla -->
+        <tfoot>
+        <tr>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>TELEFONO</th>
+            <th>MENSAJE</th>
+            <th>Nº MENSAJE</th>
+
+        </tr>
+        </tfoot>
+        <tbody>
+        <?php foreach ($resultado as $result) : ?>
+            <!-- Desde aqui los datos de cada paciente y usuario -->
+            <tr>
+                <td><?php echo $result->getNombre() ?></td>
+                <td><a href="mailto:<?php echo $result->getCorreo() ?>"><?php echo $result->getCorreo() ?></a></td>
+                <td><?php echo $result->getTelefono() ?></td>
+                <td><?php echo $result->getMensaje() ?></td>
+                <td><?php echo $result->getIDMensaje() ?></td>
+
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+        <?php
     }
 }

@@ -81,27 +81,27 @@ if (isset($_SESSION["idioma"])){
               <div class="modal-body">
                 <!-- Interior del formulario -->
                   <h1 class="item-intro text-muted center">CREAR NUEVO USUARIO</h1>
-                    <form role="form" action="usuarios.php" method="post">
+                    <form id="enviarForm" role="form" action="usuarios.php" method="post">
                        <div class="form-group">
                           <label for="nombre">Usuario:</label>
-                          <input type="nombre" class="form-control " id="formNombre" name="nombre" required>
+                          <input type="nombre" class="form-control " id="formNombre" name="nombre" placeholder="Nombre y apellidos *" required>
                         </div>
 
                         <div class="form-group">
                           <label for="nombre">Correo:</label>
-                          <input type="nombre" class="form-control" id="formCorreo" name="correo" required>
+                          <input type="nombre" class="form-control" id="formCorreo" name="correo" placeholder="Correo electronico *" required>
                         </div>
 
                         <div class="form-group">
                           <label for="pass">Contraseña:</label>
-                          <input type="password" class="form-control" id="formPassw" name="passw" required>
+                          <input type="password" class="form-control" id="formPassw" name="passw" placeholder="Contraseña *" required>
                         </div>
 
                         <div class="form-group">
                           <label for="pass">Contraseña:</label>
-                          <input type="password" class="form-control" id="formPasswRepeat" required>
+                          <input type="password" class="form-control" id="formPasswRepeat" placeholder="Repite la contraseña *" required>
                         </div>
-                        <button type="submit" class="btn btn-primary" >Crear</button>
+                        <button type="button" class="btn btn-primary" id="button"  onclick="comprobarFormulario()" disabled>Crear</button>
                     </form>
               </div>
             </div>
@@ -165,10 +165,18 @@ if (isset($_SESSION["idioma"])){
   <script src="js/Bootstrap.js"></script>
   <script src="js/Scripts.js"></script>
 
+   <!-- SweetAlert -->
+   <script src="node_modules/sweetalert2/dist/sweetalert2.js"></script>
+   <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.css">
+
   <!-- Cambio de idioma -->
   <script type="text/javascript">
     document.getElementById("castellano").onclick= cambioIdioma;
     document.getElementById("valenciano").onclick= cambioIdioma;
+    document.getElementById("formPassw").onkeyup=comprobarPassw;
+    document.getElementById("formPasswRepeat").onkeyup=comprobarPassw;
+    document.getElementById("formNombre").onkeyup=comprobarNom;
+    document.getElementById("formCorreo").onkeyup=validarEmail;
   </script>
 
 </body>

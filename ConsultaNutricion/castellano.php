@@ -12,8 +12,8 @@ $navIdioma="Idioma";
 $navEntrar="Entrar / Registrar";
 
 /*Cabecera*/
-$cabTitulo1="Amorchita Nutrición";
-$cabTitulo2="Consulta nutrición ónline";
+$cabTitulo1="consulta de nutrición";
+$cabTitulo2="ONLINE";
 $cabBoton="Saber más";
 
 /*Servicios*/
@@ -74,7 +74,7 @@ $pidBoton="QUIERO <br> COMENZAR <br> YA!";
 
 /*Contacto*/
 $conTitulo1="Contacto";
-$conTitulo2="Preguntame cualquier duda por resolver";
+$conTitulo2="Pregunta cualquier duda por resolver";
 
 $conPlaceNombre="Tu nombre *";
 $conPlaceEmail="Tu email *";

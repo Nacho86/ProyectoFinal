@@ -13,7 +13,7 @@ date_default_timezone_set('UTC');
 
 $dbh = Connection::make();
 
-$stmt = $dbh->prepare("SELECT * FROM fechas");
+$stmt = $dbh->prepare("SELECT * FROM fechas  WHERE fecha NOT IN (SELECT fecha FROM citas WHERE confReserva=1)");
 $stmt_2 = $dbh->prepare("SELECT * FROM citas WHERE ID_Usuario = :num_Usuario");
 
 $parameters = [':num_Usuario' => $_SESSION['num_Usuario']];
@@ -33,10 +33,16 @@ $eventos_calendario = '';
 
 if (count($citas) > 0) {
     for ($i = 0; $i < count($citas); $i++) {
+        $color="";
+        if ($citas[$i]['confReserva']==1){
+            $color= 'green';
+        }else{
+            $color= 'orange';
+        }
         if ($i == 0) {
-            $eventos_calendario .= '{title: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "orange", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
+            $eventos_calendario .= '{title: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "'.$color.'", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
         } else {
-            $eventos_calendario .= ', {title: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "orange", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
+            $eventos_calendario .= ', {title: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "'.$color.'", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
         }
     }
 }
@@ -350,10 +356,10 @@ if (count($fechas) > 0) {
                            aria-expanded="false"><?php echo $navIdioma ?></a>
                         <div class="dropdown-menu " style="border-color: transparent; background-color: #212529;"
                              aria-labelledby="dropdownMenu2">
-                            <button class="dropdown-item btn bg-transparent" style="color: white; " id="castellano"
+                            <button class="dropdown-item btn bg-transparent" style="color: #9362bd; " id="castellano"
                                     type="button">Castellano
                             </button>
-                            <button class="dropdown-item btn bg-transparent" style="color: white" id="valenciano"
+                            <button class="dropdown-item btn bg-transparent" style="color: #9362bd" id="valenciano"
                                     type="button">Valenciano
                             </button>
                         </div>

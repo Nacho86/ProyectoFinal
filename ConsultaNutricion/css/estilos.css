@@ -8,15 +8,16 @@ p {
 }
 
 a {
-  color: #fed136;
+  color: #9362bd;
 }
 
 a:hover {
-  color: #fec503;
+  color: #8fd157;
 }
 
 .text-primary {
-  color: #fed136 !important;
+  color: #8fd157 !important;
+
 }
 
 
@@ -26,9 +27,12 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6
+ {
   font-weight: 700;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  color: #9362bd;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.75);
 }
 
 .page-section {
@@ -71,18 +75,18 @@ h6 {
 }
 
 .btn-primary {
-  background-color: #fed136;
-  border-color: #fed136;
+  background-color: #9362bd;
+  border-color: #9362bd;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.75);
 }
 
 .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
-  background-color: #fec810 !important;
-  border-color: #fec810 !important;
+  background-color: #9362bd !important;
+  border-color: #9362bd !important;
   color: white;
 }
 
 .btn-primary:active, .btn-primary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
 }
 
 #mainNav {
@@ -96,30 +100,31 @@ h6 {
   text-transform: uppercase;
   color: white;
   border: 0;
-  background-color: #fed136;
+  background-color: #9362bd;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 #mainNav .navbar-brand {
-  color: #fed136;
+  color: #9362bd;
   font-family: 'Kaushan Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
-  color: #fec503;
+  color: #8fd157;
 }
 
 #mainNav .navbar-nav .nav-item .nav-link {
   font-size: 90%;
-  font-weight: 400;
+  font-weight: 600;
   padding: 0.75em 0;
   letter-spacing: 1px;
-  color: white;
+  color: #9362bd;
+  text-shadow: 2px 1px 1px rgba(0,0,0,0.75);
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
-  color: #fed136;
+  color: #8fd157;
 }
 
 @media (min-width: 992px) {
@@ -150,8 +155,9 @@ h6 {
 
 header.masthead {
   text-align: center;
-  color: white;
- 
+  color: #9362bd;
+  text-shadow: 2px 1px 1px rgba(0,0,0,0.75);
+
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -343,7 +349,7 @@ header.masthead .intro-text .intro-heading {
   margin-left: 35px;
   /* IE 9 */
   transform: rotate(45deg);
-  background-color: #212529;
+  background-color: #9362bd;
 }
 
 .articulo-modal .close-modal .lr .rl {
@@ -353,7 +359,7 @@ header.masthead .intro-text .intro-heading {
   height: 75px;
   /* IE 9 */
   transform: rotate(90deg);
-  background-color: #212529;
+  background-color: #9362bd;
 }
 
 .timeline {
@@ -421,7 +427,7 @@ header.masthead .intro-text .intro-heading {
   color: white;
   border: 7px solid #e9ecef;
   border-radius: 100%;
-  background-color: #fed136;
+  background-color: #9362bd;
 }
 
 .timeline > li .timeline-image h4 {
@@ -456,7 +462,7 @@ header.masthead .intro-text .intro-heading {
 
 .timeline .timeline-heading h4 {
   margin-top: 0;
-  color: inherit;
+
 }
 
 .timeline .timeline-heading h4.subheading {
@@ -549,11 +555,11 @@ header.masthead .intro-text .intro-heading {
   clip-path: polygon(0% 0%, 100% 50px, 100% 100%, 0% calc(100% - 50px));
 }
 .subdiagonal{
-  padding-bottom: 100px
+  padding-bottom: 100px;
 }
 
 .team-member {
-  margin-top: 100px
+  margin-top: 100px;
   margin-bottom: 50px;
   text-align: center;
 }
@@ -582,7 +588,7 @@ section#contacto {
 }
 
 section#contacto .section-heading {
-  color: white;
+  color: #9362bd;
 }
 
 section#contacto .form-group {
@@ -603,7 +609,7 @@ section#contacto .form-group textarea.form-control {
 }
 
 section#contacto .form-control:focus {
-  border-color: #fed136;
+  border-color: #8fd157;
   box-shadow: none;
 }
 .footer {
@@ -614,8 +620,9 @@ section#contacto .form-control:focus {
 .footer span.copyright {
   font-size: 90%;
   line-height: 40px;
-  text-transform: none;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  color:#9362bd ;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.75);
 }
 
 .footer ul.quicklinks {
@@ -640,9 +647,12 @@ ul.social-buttons li a {
   color: white;
   border-radius: 100%;
   outline: none;
-  background-color: #212529;
+  background-color: #9362bd;
 }
 
 ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
-  background-color: #fed136;
+  background-color: #8fd157;
+}
+.hvr-bounce-to-top:before{
+  background: #8fd157 !important;
 }

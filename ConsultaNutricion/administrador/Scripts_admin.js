@@ -1,4 +1,3 @@
-
 // Funcion para BORRAR lo que este hecho por DOM
 function borrarMarcaCalendario(evento) {
     if (document.getElementById('marcaCalendario')) {
@@ -958,7 +957,7 @@ function modificarPaciente(id) {
                 botonEnvio.setAttribute('type', 'submit');
                 botonEnvio.setAttribute('class', 'btn btn-primary');
                 botonEnvio.setAttribute('id', 'button');
-                botonEnvio.setAttribute('onclick', 'editArticle(' + paciente['ID_paciente'] + ')');
+                botonEnvio.setAttribute('onclick', 'editPaciente(' + paciente['ID_paciente'] + ')');
                 let textBotonEnvio = document.createTextNode('GUARDAR PACIENTE');
                 let br = document.createElement("br");
 
@@ -2268,6 +2267,7 @@ function nuevaAnamnesis(id) {
 
 }
 
+//Funcion para CREAR UNA NUEVA REVISION
 function nuevaRevision(id) {
 
     borrarMarca();
@@ -2420,6 +2420,7 @@ function nuevaRevision(id) {
 
 }
 
+//FUNCION QUE MUESTRA TODAS LAS REVISIONES DE UN PACIENTE
 function verTodasRevisiones(id) {
     borrarMarca();
 
@@ -2478,6 +2479,7 @@ function verTodasRevisiones(id) {
 
 }
 
+//FUNCION QUE MUESTRA LOS MENSAJES DE CONTACTO
 function verMensajes() {
     let httpRequest = new XMLHttpRequest();
     httpRequest.open('POST', '../consultas_ajax.php', true);
@@ -2494,6 +2496,7 @@ function verMensajes() {
 
 }
 
+//FUNCION QUE MUESTRA LAS ALERTAS DE CITA RESERVADA
 function verAlertas() {
     let httpRequest = new XMLHttpRequest();
     httpRequest.open('POST', '../consultas_ajax.php', true);
@@ -2510,6 +2513,7 @@ function verAlertas() {
 
 }
 
+//FUNCION QUE MUESTRA USUARIOS PARA VER SUS GRAFICAS
 function verGraficas() {
 
     borrarMarca();
@@ -2571,6 +2575,7 @@ function verGraficas() {
 
 }
 
+//FUNCION QUE MUESTRA LOS DATOS OBTENIDOS DE LAS REVISIONES EN FORMA DE GRAFICAS
 function datosGraficas(id) {
     borrarMarca();
     borrarMarcaCalendario();
@@ -2593,9 +2598,8 @@ function datosGraficas(id) {
     let textoTituloCapas = document.createTextNode('Datos del usuario');
     let cuerpo = document.createElement("div");
     cuerpo.setAttribute('class', 'card-body');
-    let graficas=document.createElement("div");
-    graficas.setAttribute('id','myfirstchart');
-
+    let graficas = document.createElement("div");
+    graficas.setAttribute('id', 'myfirstchart');
 
 
     let principal = document.getElementsByClassName("marca");
@@ -2617,7 +2621,7 @@ function datosGraficas(id) {
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === 4) {
             if (httpRequest.status === 200) {
-                if(httpRequest.responseText != '') {
+                if (httpRequest.responseText != '') {
                     let revisiones = JSON.parse(httpRequest.responseText);
                     console.log(revisiones);
 
@@ -2627,16 +2631,16 @@ function datosGraficas(id) {
                         // Chart data records -- each entry in this array corresponds to a point on
                         // the chart.
                         data: revisiones
-                            /*[
-                            { year: '2008', value: 200,value2: 200 },
-                            { year: '2009', value: 10,value2: 150 },
-                            { year: '2010', value: 5,value2: 100 },
-                            { year: '2011', value: 5,value2: 15 },
-                            { year: '2013', value: 10,value2: 25 },
-                            { year: '2020', value: 250,value2: 183 },
-                            { year: '2021', value: 5,value2: 182.5 },
-                            { year: '2022', value: 20,value2: 100 }
-                            ]*/
+                        /*[
+                        { year: '2008', value: 200,value2: 200 },
+                        { year: '2009', value: 10,value2: 150 },
+                        { year: '2010', value: 5,value2: 100 },
+                        { year: '2011', value: 5,value2: 15 },
+                        { year: '2013', value: 10,value2: 25 },
+                        { year: '2020', value: 250,value2: 183 },
+                        { year: '2021', value: 5,value2: 182.5 },
+                        { year: '2022', value: 20,value2: 100 }
+                        ]*/
                         ,
                         // The name of the data record attribute that contains x-values.
                         xkey: 'fecha',
@@ -2644,7 +2648,7 @@ function datosGraficas(id) {
                         ykeys: ['agua', 'grasa_cor', 'indice_cor', 'masa_mag', 'peso'],
                         // Labels for the ykeys -- will be displayed when you hover over the
                         // chart.
-                        labels: ['Agua','Grasa Corporal', 'Indice Corporal', 'Masa magra', 'Peso'],
+                        labels: ['Agua', 'Grasa Corporal', 'Indice Corporal', 'Masa magra', 'Peso'],
                         resize: true,
                         lineColors: ['red', 'blue', 'orange', 'yellow', 'green']
                     })
@@ -2652,11 +2656,389 @@ function datosGraficas(id) {
             }
         }
     };
-    httpRequest.send('datosGraf='+id);
+    httpRequest.send('datosGraf=' + id);
 
 
 }
 
-function eliminarFecha() {
-    alert($('#txtFechaDelete').val());
+//FUNCION PARA MODICAR LAS REVISIONES
+function modificarRevision(id) {
+
+
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', '../consultas_ajax.php', true);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+                borrarMarca();
+
+                let revision = JSON.parse(httpRequest.responseText);
+                //Aqui empieza a montarse
+                let br = document.createElement("br");
+                let contenedor = document.createElement("div");
+                contenedor.setAttribute('class', 'container-fluid');
+                contenedor.setAttribute('id', 'prueba');
+                let titulo = document.createElement("h1");
+                titulo.setAttribute('class', 'h3 mb-2 text-gray-800');
+                let textoTitulo = document.createTextNode('REVISION');
+                let parrafoTitulo = document.createElement("p");
+                parrafoTitulo.setAttribute('class', 'mb-4');
+                let textoParrafo = document.createTextNode('MODIFICA REVISION');
+                let capa1 = document.createElement("div");
+                capa1.setAttribute('class', 'card shadow mb-4');
+                let capa2 = document.createElement("div");
+                capa2.setAttribute('class', 'card-header py-3');
+                let tituloCapas = document.createElement("h6");
+                tituloCapas.setAttribute('class', 'm-0 font-weight-bold text-primary');
+                let textoTituloCapas = document.createTextNode('Estructura de la revisión ');
+                let cuerpo = document.createElement("div");
+                cuerpo.setAttribute('class', 'card-body');
+                let cuerpoFormulario = document.createElement("form");
+                cuerpoFormulario.setAttribute('role', 'form');
+                cuerpoFormulario.setAttribute('action', '../revisiones.php');
+                cuerpoFormulario.setAttribute('method', 'post');
+                cuerpoFormulario.setAttribute('enctype', 'multipart/form-data');
+
+                //Crea los grupos del Formulario
+                let grupoFormulario = document.createElement("div");
+                grupoFormulario.setAttribute('class', 'form-group');
+
+                let indice_corlabel = document.createElement("label");
+                indice_corlabel.setAttribute('for', 'indice_cor');
+                let textIndice_cor = document.createTextNode('Indice Corporal:');
+                let indice_cor = document.createElement("input");
+                indice_cor.setAttribute('type', 'text');
+                indice_cor.setAttribute('class', 'form-control');
+                indice_cor.setAttribute('value', revision['indice_cor']);
+                indice_cor.setAttribute('name', 'indice_cor');
+
+                let grasa_corlabel = document.createElement("label");
+                grasa_corlabel.setAttribute('for', 'grasa_cor');
+                let textGrasa_cor = document.createTextNode('Grasa Corporal:');
+                let grasa_cor = document.createElement("input");
+                grasa_cor.setAttribute('type', 'text');
+                grasa_cor.setAttribute('class', 'form-control');
+                grasa_cor.setAttribute('value', revision['grasa_cor']);
+                grasa_cor.setAttribute('name', 'grasa_cor');
+
+                let masa_maglabel = document.createElement("label");
+                masa_maglabel.setAttribute('for', 'masa_mag');
+                let textMasa_mag = document.createTextNode('Masa Magra:');
+                let masa_mag = document.createElement("input");
+                masa_mag.setAttribute('type', 'text');
+                masa_mag.setAttribute('class', 'form-control');
+                masa_mag.setAttribute('value', revision['masa_mag']);
+                masa_mag.setAttribute('name', 'masa_mag');
+
+                let pesolabel = document.createElement("label");
+                pesolabel.setAttribute('for', 'peso');
+                let textPeso = document.createTextNode('Peso:');
+                let peso = document.createElement("input");
+                peso.setAttribute('type', 'text');
+                peso.setAttribute('class', 'form-control');
+                peso.setAttribute('value', revision['peso']);
+                peso.setAttribute('name', 'peso');
+
+
+                let agualabel = document.createElement("label");
+                agualabel.setAttribute('for', 'agua');
+                let textAgua = document.createTextNode('Agua:');
+                let agua = document.createElement("input");
+                agua.setAttribute('type', 'text');
+                agua.setAttribute('class', 'form-control');
+                agua.setAttribute('value', revision['agua']);
+                agua.setAttribute('name', 'agua');
+
+                let observacioneslabel = document.createElement("label");
+                observacioneslabel.setAttribute('for', 'observaciones');
+                let textObservaciones = document.createTextNode('Observaciones:');
+                let observaciones = document.createElement("textarea");
+                observaciones.setAttribute('type', 'text');
+                observaciones.setAttribute('class', 'form-control');
+                observaciones.setAttribute('name', 'observaciones');
+                observaciones.innerText = revision['observaciones'];
+
+                let input = document.createElement('input');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('name', 'ID_revision');
+                input.setAttribute('value', id);
+
+                let input2 = document.createElement('input');
+                input2.setAttribute('type', 'hidden');
+                input2.setAttribute('name', 'ID_paciente');
+                input2.setAttribute('value', revision['ID_paciente']);
+
+                //Crea BOTON DE ENVIO
+                let botonEnvio = document.createElement("button");
+                botonEnvio.setAttribute('type', 'submit');
+                botonEnvio.setAttribute('class', 'btn btn-primary');
+                botonEnvio.setAttribute('id', 'button');
+                botonEnvio.setAttribute('onclick', 'editRevision(' + revision['ID_revision'] + ')');
+                let textBotonEnvio = document.createTextNode('GUARDAR');
+
+
+                //Union de los elementos padres con hijos.
+
+                let principal = document.getElementsByClassName("marca");
+                principal[0].appendChild(contenedor);
+                contenedor.appendChild(titulo);
+                titulo.appendChild(textoTitulo);
+                contenedor.appendChild(parrafoTitulo);
+                parrafoTitulo.appendChild(textoParrafo);
+                contenedor.appendChild(capa1);
+                capa1.appendChild(capa2);
+                capa2.appendChild(tituloCapas);
+                tituloCapas.appendChild(textoTituloCapas);
+                capa1.appendChild(cuerpo);
+                cuerpo.appendChild(cuerpoFormulario);
+
+                cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(indice_corlabel);
+                indice_corlabel.appendChild(textIndice_cor);
+                grupoFormulario.appendChild(indice_cor);
+
+                cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(grasa_corlabel);
+                grasa_corlabel.appendChild(textGrasa_cor);
+                grupoFormulario.appendChild(grasa_cor);
+
+                cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(masa_maglabel);
+                masa_maglabel.appendChild(textMasa_mag);
+                grupoFormulario.appendChild(masa_mag);
+
+                cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(pesolabel);
+                pesolabel.appendChild(textPeso);
+                grupoFormulario.appendChild(peso);
+
+                cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(agualabel);
+                agualabel.appendChild(textAgua);
+                grupoFormulario.appendChild(agua);
+
+                cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(observacioneslabel);
+                observacioneslabel.appendChild(textObservaciones);
+                grupoFormulario.appendChild(observaciones);
+
+                cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(br);
+
+                cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(input);
+
+                cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(input2);
+
+                cuerpoFormulario.appendChild(grupoFormulario);
+                grupoFormulario.appendChild(botonEnvio);
+                botonEnvio.appendChild(textBotonEnvio);
+
+            }
+        }
+    };
+    httpRequest.send('getRevision=' + id);
+}
+
+//FUNCION PARA ELIMINAR LAS REVISIONES
+function eliminarRevision(id) {
+    Swal.fire({
+        title: 'Eliminar revisión?',
+        text: 'Seguro que quiere eliminar la revisión seleccionada?',
+        icon: 'warning',
+        showCloseButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.value) {
+            let httpRequest = new XMLHttpRequest();
+            httpRequest.open('POST', '../consultas_ajax.php', true);
+            httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            httpRequest.onreadystatechange = function () {
+                if (httpRequest.readyState === 4) {
+                    if (httpRequest.status === 200) {
+                        Swal.fire(
+                            'Enhorabuena!',
+                            'La revisión seleccionada ha sido eliminado',
+                            'success'
+                        );
+                        verTodasRevisiones();
+                    }
+                }
+            };
+            httpRequest.send('removeRevision=' + id);
+        }
+    })
+
+}
+
+//FUNCION QUE MUESTRA LA INFORMACION DE QUIEN HA HECHO UNA RESERVA
+function confirmarReserva(id) {
+
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', '../consultas_ajax.php', true);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+
+                Swal.fire({
+                    title: 'Se ha reservado la fecha',
+                    text: 'Se ha asignado la fecha de reserva al usuario',
+                    icon: 'success'
+                });
+                location.reload(true);
+            }
+        }
+    };
+    httpRequest.send('confirmaReserva=' + id);
+
+}
+
+
+//FUNCION QUE MUESTRA LA INFORMACION DE LOS MENSAJES ENVIADOS
+function mensajeRespondido(id) {
+
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', '../consultas_ajax.php', true);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+
+                Swal.fire({
+                    title: 'Se ha eliminado de la bandeja de mensajes',
+                    icon: 'success'
+                });
+
+                location.reload(true);
+
+            }
+        }
+    };
+    httpRequest.send('mensajeRespondido=' + id);
+
+}
+
+//FUNCION QUE MUESTRA TODAS LAS ALERTAS ENVIADAS
+function verTodosAvisos() {
+
+    borrarMarca();
+    borrarMarcaCalendario();
+
+    let contenedor = document.createElement("div");
+    contenedor.setAttribute('class', 'container-fluid');
+    contenedor.setAttribute('id', 'prueba');
+    let titulo = document.createElement("h1");
+    titulo.setAttribute('class', 'h3 mb-2 text-gray-800');
+    let textoTitulo = document.createTextNode('TODAS LAS ALERTAS CONFIRMADAS GUARDADAS');
+    let parrafoTitulo = document.createElement("p");
+    parrafoTitulo.setAttribute('class', 'mb-4');
+    let textoParrafo = document.createTextNode('REVISA TODAS LAS ALERTAS');
+    let capa1 = document.createElement("div");
+    capa1.setAttribute('class', 'card shadow mb-4');
+    let capa2 = document.createElement("div");
+    capa2.setAttribute('class', 'card-header py-3');
+    let tituloCapas = document.createElement("h6");
+    tituloCapas.setAttribute('class', 'm-0 font-weight-bold text-primary');
+    let textoTituloCapas = document.createTextNode('Alertas');
+    let cuerpo = document.createElement("div");
+    cuerpo.setAttribute('class', 'card-body');
+    let tablaResponsiva = document.createElement("div");
+    tablaResponsiva.setAttribute('class', 'table-responsive');
+    let tablas = document.createElement("table");
+    tablas.setAttribute('class', 'table table-bordered');
+    tablas.setAttribute('id', 'dataTable');
+    tablas.setAttribute('width', '100%');
+    tablas.setAttribute('cellspacing', '0');
+
+    let principal = document.getElementsByClassName("marca");
+    principal[0].appendChild(contenedor);
+    contenedor.appendChild(titulo);
+    titulo.appendChild(textoTitulo);
+    contenedor.appendChild(parrafoTitulo);
+    parrafoTitulo.appendChild(textoParrafo);
+    contenedor.appendChild(capa1);
+    capa1.appendChild(capa2);
+    capa2.appendChild(tituloCapas);
+    tituloCapas.appendChild(textoTituloCapas);
+    capa1.appendChild(cuerpo);
+    cuerpo.appendChild(tablaResponsiva);
+    tablaResponsiva.appendChild(tablas);
+
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', '../consultas_ajax.php', true);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+                document.getElementById('dataTable').innerHTML = httpRequest.responseText;
+            }
+        }
+    };
+    httpRequest.send('verTodosAvisos=');
+
+}
+
+//FUNCION QUE MUESTRA TODOS LOS MENSAJES ENVIADOS
+function verTodosMensajes() {
+
+    borrarMarca();
+    borrarMarcaCalendario();
+
+    let contenedor = document.createElement("div");
+    contenedor.setAttribute('class', 'container-fluid');
+    contenedor.setAttribute('id', 'prueba');
+    let titulo = document.createElement("h1");
+    titulo.setAttribute('class', 'h3 mb-2 text-gray-800');
+    let textoTitulo = document.createTextNode('TODOS LOS MENSAJES GUARDADOS');
+    let parrafoTitulo = document.createElement("p");
+    parrafoTitulo.setAttribute('class', 'mb-4');
+    let textoParrafo = document.createTextNode('REVISA TODOS LOS MENSAJES');
+    let capa1 = document.createElement("div");
+    capa1.setAttribute('class', 'card shadow mb-4');
+    let capa2 = document.createElement("div");
+    capa2.setAttribute('class', 'card-header py-3');
+    let tituloCapas = document.createElement("h6");
+    tituloCapas.setAttribute('class', 'm-0 font-weight-bold text-primary');
+    let textoTituloCapas = document.createTextNode('Mensajes');
+    let cuerpo = document.createElement("div");
+    cuerpo.setAttribute('class', 'card-body');
+    let tablaResponsiva = document.createElement("div");
+    tablaResponsiva.setAttribute('class', 'table-responsive');
+    let tablas = document.createElement("table");
+    tablas.setAttribute('class', 'table table-bordered');
+    tablas.setAttribute('id', 'dataTable');
+    tablas.setAttribute('width', '100%');
+    tablas.setAttribute('cellspacing', '0');
+
+    let principal = document.getElementsByClassName("marca");
+    principal[0].appendChild(contenedor);
+    contenedor.appendChild(titulo);
+    titulo.appendChild(textoTitulo);
+    contenedor.appendChild(parrafoTitulo);
+    parrafoTitulo.appendChild(textoParrafo);
+    contenedor.appendChild(capa1);
+    capa1.appendChild(capa2);
+    capa2.appendChild(tituloCapas);
+    tituloCapas.appendChild(textoTituloCapas);
+    capa1.appendChild(cuerpo);
+    cuerpo.appendChild(tablaResponsiva);
+    tablaResponsiva.appendChild(tablas);
+
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', '../consultas_ajax.php', true);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+                document.getElementById('dataTable').innerHTML = httpRequest.responseText;
+            }
+        }
+    };
+    httpRequest.send('verTodosMensajes=');
+
 }

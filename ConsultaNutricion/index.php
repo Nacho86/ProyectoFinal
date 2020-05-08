@@ -77,10 +77,10 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                            aria-expanded="false"><?php echo $navIdioma ?></a>
                         <div class="dropdown-menu " style="border-color: transparent; background-color: #212529;"
                              aria-labelledby="dropdownMenu2">
-                            <button class="dropdown-item btn bg-transparent" style="color: white; " id="castellano"
+                            <button class="dropdown-item btn bg-transparent" style="color: #9362bd;" id="castellano"
                                     type="button">Castellano
                             </button>
-                            <button class="dropdown-item btn bg-transparent" style="color: white" id="valenciano"
+                            <button class="dropdown-item btn bg-transparent" style="color: #9362bd" id="valenciano"
                                     type="button">Valenciano
                             </button>
                         </div>
@@ -97,11 +97,11 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="dropdown-menu " style="border-color: transparent; background-color: #212529;"
                                  aria-labelledby="dropdownMenu2">
                                 <a href="pagCitas.php">
-                                    <button class="dropdown-item btn bg-transparent" style="color: white" id="valenciano"
+                                    <button class="dropdown-item btn bg-transparent" style="color: #9362bd" id="valenciano"
                                             type="button">Pedir cita
                                     </button></a>
                                 <form action="cerrarSesion.php" method="post">
-                                    <input  class="dropdown-item btn bg-transparent" style="color: white; " id="cerrar"
+                                    <input  class="dropdown-item btn bg-transparent" style="color: #9362bd; " id="cerrar"
                                              type="submit" value="Cerrar Sesión">
                                     <input type="hidden" name="logout">
                                 </form>
@@ -115,11 +115,11 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </nav>
 
 <!-- Cabecera -->
-<header class="masthead " style="background-color: #212529" ;>
+<header class="masthead " style="background-image:url('img/cabecera.jpg')">
     <div class="container">
         <div class="intro-text">
-            <div class="intro-lead-in"><?php echo $cabTitulo1 ?></div>
-            <div class="intro-heading text-uppercase"><?php echo $cabTitulo2 ?></div>
+            <div class=" intro-heading text-uppercase"><?php echo $cabTitulo1 ?></div>
+            <div class=" intro-lead-in"><?php echo $cabTitulo2 ?></div>
             <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger hvr-bounce-to-top"
                href="#servicios"><?php echo $cabBoton ?></a>
         </div>
@@ -237,7 +237,7 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- Sobre mi -->
 <section class="page-section" id="sobreMi">
     <div class="diagonal">
-        <div class="row">
+        <div class="row" style="height: 30px">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading text-uppercase"><?php echo $sobTitulo1 ?></h2>
                 <h3 class="section-subheading text-muted"><?php echo $sobTitulo2 ?></h3>
@@ -353,7 +353,7 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <a href="pagCitas.php">
                             <?php endif; ?>
                             <div class="timeline-image ">
-                                <h4><?php echo $pidBoton ?></h4>
+                                <h4 style="color: white"><?php echo $pidBoton ?></h4>
                             </div>
                         </a>
                     </li>
@@ -364,12 +364,12 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </section>
 
 <!-- Contacto -->
-<section class="page-section" id="contacto" style="background-image:url('img/cabecera.jpg')">
+<section class="page-section" id="contacto" style="background-image:url('img/contacto.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading text-uppercase"><?php echo $conTitulo1 ?></h2>
-                <h3 class="section-subheading text-muted"><?php echo $conTitulo2 ?></h3>
+                <h3 class="section-subheading text-muted" ><?php echo $conTitulo2 ?></h3>
             </div>
         </div>
         <div class="row">
@@ -412,7 +412,7 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="clearfix"></div>
                         <div class="col-lg-12 text-center">
                             <div id="success"></div>
-                            <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase"
+                            <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase hvr-bounce-to-top"
                                     type="submit"><?php echo $conBoton ?>
                             </button>
                         </div>

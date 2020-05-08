@@ -48,8 +48,8 @@ if (isset($_SESSION["idioma"])){
             <div class="dropdown nav-link">
               <a class=" dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $navIdioma ?></a>
               <div class="dropdown-menu " style="border-color: transparent; background-color: #212529;" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item btn bg-transparent" style="color: white; " id="castellano" type="button">Castellano</button>
-                <button class="dropdown-item btn bg-transparent" style="color: white" id="valenciano" type="button">Valenciano</button> 
+                <button class="dropdown-item btn bg-transparent" style="color: #9362bd; " id="castellano" type="button">Castellano</button>
+                <button class="dropdown-item btn bg-transparent" style="color: #9362bd" id="valenciano" type="button">Valenciano</button>
               </div>
             </div>
           </li>
