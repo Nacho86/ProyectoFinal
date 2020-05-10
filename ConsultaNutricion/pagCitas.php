@@ -267,6 +267,7 @@ if (count($fechas) > 0) {
                                     }
                                 };
                                 httpRequest.send('cogerCita=' + fecha);
+                                location.reload(true);
                             }
                         })
                     }

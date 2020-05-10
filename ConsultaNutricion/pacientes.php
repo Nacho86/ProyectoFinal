@@ -3,9 +3,8 @@ require_once "Connection.php";
 require_once "paciente.php";
 
 $ruta = "img/pacientes/";
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-{
-    if(isset($_POST['ID_paciente'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['ID_paciente'])) {
 
         if (is_uploaded_file($_FILES['img']['tmp_name']) === true) {
             $nombre = $_FILES['img']['name'];
@@ -29,14 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $stmt->execute($parameters);
 
 
-        } else {
+    } else {
 
-            $nombre = $_FILES['img']['name'];
-            $idUnico = time();
-            $rutaDestino = $ruta . $idUnico . $nombre;
+        $nombre = $_FILES['img']['name'];
+        $idUnico = time();
+        $rutaDestino = $ruta . $idUnico . $nombre;
         if (is_uploaded_file($_FILES['img']['tmp_name']) === true) {
             move_uploaded_file($_FILES['img']['tmp_name'], $rutaDestino);
-            } else {
+        } else {
             $rutaDestino = "img/pacientes/imagenDefecto.jpg";
         }
         $num_usu = $_POST['num_Usuario'];
@@ -52,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
         /*preparacion de la consulta*/
 
-        $stmt = $dbh->prepare("INSERT INTO pacientes (foto,telefono,fecha_nacimiento,direccion,DNI, num_Usuario) VALUES (?,?,?,?,?,?)");
+        $stmt = $dbh->prepare("INSERT INTO pacientes (foto,telefono,fecha_nacimiento,direccion,DNI, num_Usuario, ID_paciente) VALUES (?,?,?,?,?,?,?)");
 
         /*preparacion de los parametros a pasar*/
         $stmt->bindParam(1, $rutaDestino);
@@ -61,6 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $stmt->bindParam(4, $direccion);
         $stmt->bindParam(5, $DNI);
         $stmt->bindParam(6, $num_usu);
+        $stmt->bindParam(7, $num_usu);
+
 
 
         /*ejecutamos todo lo preparado anteriormente*/

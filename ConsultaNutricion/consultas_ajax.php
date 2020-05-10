@@ -310,9 +310,10 @@ if (isset($_POST['verUsuariosRevisiones'])) {
 
 //Sacar los usuarios para REVISIONES.
 if (isset($_POST['verTodasRevisiones'])) {
-    $stmt = $dbh->prepare("SELECT * FROM revisiones ORDER BY ID_revision DESC");
+    $stmt = $dbh->prepare("SELECT * FROM revisiones WHERE ID_paciente=:id ORDER BY ID_revision DESC");
+    $parameters= [':id'=> $_POST['verTodasRevisiones']];
     $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "revision");
-    $stmt->execute();
+    $stmt->execute($parameters);
 
     $resultado = $stmt->fetchAll();
 

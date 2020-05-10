@@ -2474,7 +2474,7 @@ function verTodasRevisiones(id) {
             }
         }
     };
-    httpRequest.send('verTodasRevisiones=');
+    httpRequest.send('verTodasRevisiones='+id);
 
 
 }
@@ -2650,7 +2650,7 @@ function datosGraficas(id) {
                         // chart.
                         labels: ['Agua', 'Grasa Corporal', 'Indice Corporal', 'Masa magra', 'Peso'],
                         resize: true,
-                        lineColors: ['red', 'blue', 'orange', 'yellow', 'green']
+                        lineColors: ['blue', 'orange', 'green', 'red', 'purple']
                     })
                 }
             }

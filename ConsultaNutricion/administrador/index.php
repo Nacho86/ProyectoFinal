@@ -226,6 +226,7 @@ if (count($fechas) > 0) {
                                         }
                                     };
                                     httpRequest.send('eliminarCita=' + fecha);
+                                    location.reload(true);
                                 }
                             })
                         } else {
@@ -289,6 +290,7 @@ if (count($fechas) > 0) {
                                         }
                                     };
                                     httpRequest.send('eliminarFecha=' + fecha);
+                                    location.reload(true);
                                 }
                             })
                         }
