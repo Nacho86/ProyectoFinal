@@ -1,6 +1,6 @@
 <?php
 
-$titPagina="Consulta Nutricio Online";
+$titPagina="Consulta Nutrició Online";
 
 /*Navegador*/
 $navServicios="Serveis";
@@ -12,8 +12,8 @@ $navIdioma="Idioma";
 $navEntrar="Entrar / Registrar";
 
 /*Cabecera*/
-$cabTitulo1="Amorchita Nutrició";
-$cabTitulo2="Consulta nutrició ónline";
+$cabTitulo1="Consulta Nutrició";
+$cabTitulo2="ONLINE";
 $cabBoton="Saber més";
 
 /*Servicios*/

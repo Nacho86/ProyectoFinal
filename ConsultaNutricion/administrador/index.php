@@ -606,7 +606,7 @@ if (count($fechas) > 0) {
 
                         </li>
 
-                        <!-- Elemento barra navegacion - Mensajes -->
+                        <!-- Elemento barra navegación - Mensajes -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -625,7 +625,7 @@ if (count($fechas) > 0) {
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
-                        <!-- Elemento barra navegacion - Informacion del Administrador -->
+                        <!-- Elemento barra navegación - Información del Administrador -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -633,7 +633,7 @@ if (count($fechas) > 0) {
                                 <img class="img-profile rounded-circle"
                                      src="../img/pacientes/imagenDefecto.jpg">
                             </a>
-                            <!-- Desplegable - Informacion del Administrador -->
+                            <!-- Desplegable - Información del Administrador -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
@@ -748,7 +748,7 @@ if (count($fechas) > 0) {
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Modal de cierre de sesion-->
+    <!-- Modal de cierre de sesión-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">

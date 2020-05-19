@@ -34,15 +34,15 @@ $serTexto4="Disciplina centrada en mejorar tus hábitos alimentarios y tu relaci
 
 $serBoton="Conoce todos los servicios";
 
-/*Articulos*/
+/*Artículos*/
 $artTitulo1="Artículos";
-$artTitulo2="Últimos articulos de ínteres";
+$artTitulo2="Últimos artículos de interés";
 
-$artBoton="Todos los articulos";
+$artBoton="Todos los artículos";
 
-//Articulos Modales
+//Artículos Modales
 $artFecha="Fecha";
-$artCategoria="Categoria";
+$artCategoria="Categoría";
 
 /*Sobre mi*/
 $sobTitulo1="Sobre mí";
@@ -56,9 +56,9 @@ Mis objetivos y valores personales están muy ligados a la rama sanitaria porque
 
 /*Pide cita*/
 $pidTitulo1="Pide cita";
-$pidTitulo2="Consigue tu cambio en 4 simples pasos";
+$pidTitulo2="Consigue tu cambio en cuatro simples pasos";
 
-$pidPaso1="REGISTRATE";
+$pidPaso1="REGÍSTRATE";
 $pidTexto1="texto para la parte de registrarse";
 
 $pidPaso2="PIDE CITA";
@@ -67,8 +67,8 @@ $pidTexto2="texto para la parte de pedir cita";
 $pidPaso3="HABLAMOS";
 $pidTexto3="texto para la parte de hablamos";
 
-$pidPaso4="OBTEN RESULTADOS!";
-$pidTexto4="texto para la parte de obten resultados";
+$pidPaso4="OBTÉN RESULTADOS!";
+$pidTexto4="texto para la parte de obtén resultados";
 
 $pidBoton="QUIERO <br> COMENZAR <br> YA!";
 
@@ -78,19 +78,19 @@ $conTitulo2="Pregunta cualquier duda por resolver";
 
 $conPlaceNombre="Tu nombre *";
 $conPlaceEmail="Tu email *";
-$conPlaceTelefono="Tu numero de telefono *";
+$conPlaceTelefono="Tu número de teléfono *";
 $conPlaceMensaje="Tu mensaje *";
 
 $conRequeridoNombre="Introduce tu nombre.";
-$conRequeridoEmail="Introduce tu correo electronico.";
-$conRequeridoTelefono="Introduce tu numero de telefono.";
+$conRequeridoEmail="Introduce tu correo electrónico.";
+$conRequeridoTelefono="Introduce tu numero de teléfono.";
 $conRequeridoMensaje="Introduce tu mensaje o duda.";
 
 $conBoton="Enviar mensaje";
 
 /*Footer*/
-$fooPolitica="Politica de privacidad";
-$fooTerminos="Terminos de Uso";
+$fooPolitica="Política de privacidad";
+$fooTerminos="Términos de Uso";
 
 
 /*Pagina Servicios*/
@@ -110,7 +110,7 @@ Para ello, te realizaremos un cuestionario nutricional y un estudio antropométr
 Además, durante el proceso aprenderás los pilares básicos de la nutrición y te ayudaremos a corregir los hábitos alimentarios erróneos para aprender a comer bien y no llevar siempre en mente una dieta.";
 
 $pagSerDeportivaTitulo="Nutrición deportiva";
-$pagSerDeportivaContenido="Dieta personalizada, adaptada a ti y al tipo de deporte que practicas.
+$pagSerDeportivaContenido="Dieta personalizada, adaptada a ti y al tipo de deporte que prácticas.
 <br>
 <br>
 Para que consigas el máximo rendimiento deportivo, te preparamos la dieta personalizada teniendo en cuenta tu estilo de vida, composición corporal y entrenamientos. Te ayudaremos a mejorar en tus entrenamientos y competiciones o carreras, y nos encargaremos de que tu recuperación entre sesiones sea la correcta.
@@ -163,9 +163,9 @@ $pagSerMenusContenido="Ofrecemos asesoramiento nutricional y planificación de m
 <br>
 La planificación del menú incluye un menú basal y adaptación de este a dieta sin gluten, intolerancias, alergias, dieta vegetariana… Todos los menús se confeccionan con la base de los principios de una dieta saludable y equilibrada. Además, este menú se realiza teniendo en cuenta las características del centro escolar.";
 
-/*Pagina Articulos*/
+/*Pagina Artículos*/
 
 $pagArtVolver="Volver";
 
-$pagArtTitulo1="ARTICULOS DE INTERES";
-$pagArtTitulo2="MANTENTE AL DIA CON LA MEJOR INFORMACION!";
+$pagArtTitulo1="ARTÍCULOS DE INTERES";
+$pagArtTitulo2="MANTENTE AL DIA CON LA MEJOR INFORMACIÓN!";

@@ -533,7 +533,7 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <bold>Aquí</bold>
                                     </a></small>
                                 <div class="checkbox">
-                                    <label><input type="checkbox"> Recuerdame</label>
+                                    <label><input type="checkbox"> Recuérdame</label>
                                 </div>
                                 <button type="button" id="loginlg" class="btn btn-primary">Entrar</button>
                                 <button class="btn btn-danger" data-dismiss="modal" type="button">
