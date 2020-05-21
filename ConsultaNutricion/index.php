@@ -97,7 +97,7 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="dropdown-menu " style="border-color: transparent; background-color: #212529;"
                                  aria-labelledby="dropdownMenu2">
                                 <a href="pagCitas.php">
-                                    <button class="dropdown-item btn bg-transparent" style="color: #9362bd" id="valenciano"
+                                    <button class="dropdown-item btn bg-transparent" style="color: #9362bd" id="pedirCita"
                                             type="button">Pedir cita
                                     </button></a>
                                 <form action="cerrarSesion.php" method="post">
@@ -348,7 +348,7 @@ $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </li>
                     <li class="timeline-inverted ">
                         <?php if (!isset($_SESSION['nombre'])) : ?>
-                        <a href="formulario.php" >
+                        <a data-toggle="modal" href="#entrada" >
                         <?php else : ?>
                             <a href="pagCitas.php">
                             <?php endif; ?>

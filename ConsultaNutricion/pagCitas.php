@@ -39,10 +39,12 @@ if (count($citas) > 0) {
         }else{
             $color= 'orange';
         }
-        if ($i == 0) {
-            $eventos_calendario .= '{title: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "'.$color.'", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
-        } else {
-            $eventos_calendario .= ', {title: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "'.$color.'", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
+        if ($i == 0 && $color== 'green') {
+            $eventos_calendario .= '{title: "Reserva Confirmada", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "'.$color.'", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
+        } else if ($i ==0) {
+            $eventos_calendario .= '{title: "Reserva ", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "'.$color.'", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
+            }else{
+            $eventos_calendario .= ', {title: "Reserva ", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "'.$color.'", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
         }
     }
 }
@@ -203,6 +205,7 @@ if (count($fechas) > 0) {
                                     }
                                 };
                                 httpRequest.send('eliminarCita=' + fecha);
+                                location.reload(true);
                             }
                         })
 
@@ -210,7 +213,7 @@ if (count($fechas) > 0) {
                     }else{
                         Swal.fire({
                             title: 'seleccionar la fecha?',
-                            text: 'Seguro que quiere seleccionar la fecha seleccionada?',
+                            text: 'Seguro que quiere la fecha seleccionada?',
                             icon: 'primary',
                             showCloseButton: true,
                             showCancelButton: true,
@@ -262,12 +265,17 @@ if (count($fechas) > 0) {
                                                 'Enhorabuena!',
                                                 'La Cita ha sido reservada',
                                                 'success'
+
                                             );
+
+
                                         }
                                     }
                                 };
                                 httpRequest.send('cogerCita=' + fecha);
-                                location.reload(true);
+                                setTimeout(() => {  location.replace("index.php"); }, 2000);
+
+
                             }
                         })
                     }

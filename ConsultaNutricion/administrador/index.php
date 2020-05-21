@@ -45,13 +45,16 @@ if (count($citas) > 0) {
         } else {
             $color = 'orange';
         }
-        if ($i == 0) {
-            $eventos_calendario .= '{title: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "' . $color . '", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
-        } else {
-            $eventos_calendario .= ', {title: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "' . $color . '", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
+        if ($i == 0 && $color== 'green') {
+            $eventos_calendario .= '{title: "Usuario ' . $citas[$i]['ID_Usuario'] . '", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "'.$color.'", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
+        } else if ($i ==0) {
+            $eventos_calendario .= '{title: "Cita pedida ", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "'.$color.'", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
+        }else{
+            $eventos_calendario .= ', {title: "Cita pedida ", start: "' . $citas[$i]['fecha'] . '", end: "' . $citas[$i]['fecha'] . '", color: "'.$color.'", textColor: "white", descripcion: "Cita usuario ' . $citas[$i]['ID_Usuario'] . '"}';
         }
     }
 }
+
 
 if (count($fechas) > 0) {
     for ($j = 0; $j < count($fechas); $j++) {
@@ -762,7 +765,11 @@ if (count($fechas) > 0) {
                 <div class="modal-body">Estas seguro que quieres cerrar tu sesión?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="#" ">Cerrar</a>
+                    <form action="../cerrarSesion.php" method="post">
+                        <input  class="btn btn-primary"  id="cerrar"
+                                type="submit" value="Cerrar ">
+                        <input type="hidden" name="logout">
+                    </form>
                 </div>
             </div>
         </div>
