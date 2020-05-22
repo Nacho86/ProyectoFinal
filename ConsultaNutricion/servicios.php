@@ -38,7 +38,7 @@ if (isset($_SESSION["idioma"])){
    <!-- Navegador -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="index.php">Titulo de la consulta</a>
+      <a class="navbar-brand js-scroll-trigger" href="index.php">Logo de la empresa</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#NavegadorResponsive" aria-controls="NavegadorResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
